@@ -58,9 +58,9 @@ object PopupTestCommands {
 
     private fun declineCommand(type: RequestType): String? = when (type) {
         RequestType.TRADE -> null
-        RequestType.PARTY -> "/party deny $TEST_PLAYER"
+        RequestType.PARTY -> null
         RequestType.FRIEND -> "/friend deny $TEST_PLAYER"
-        RequestType.GUILD -> "/guild deny $TEST_PLAYER"
-        RequestType.DUEL -> "/duel deny $TEST_PLAYER"
+        RequestType.GUILD -> null
+        RequestType.DUEL -> null
     }
 }

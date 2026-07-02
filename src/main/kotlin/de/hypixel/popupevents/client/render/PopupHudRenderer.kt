@@ -83,6 +83,7 @@ object PopupHudRenderer {
         val title = request.title
         val question = request.question
         val controls = "[Y] Accept      [N] Decline"
+        val dismissControl = "[X] Dismiss"
         val color = (textAlpha shl 24) or 0xFFFFFF
         val accent = (textAlpha shl 24) or 0x80FF80
         val progressBack = ((alpha * 95.0f).roundToInt().coerceIn(0, 255) shl 24) or 0x1F1F1F
@@ -95,7 +96,8 @@ object PopupHudRenderer {
         pose.scale(scale, scale)
         graphics.text(textRenderer, title, alignedTextX(title, padding, config.width, alignment), 10, color, true)
         graphics.text(textRenderer, question, alignedTextX(question, padding, config.width, alignment), 28, color, true)
-        graphics.text(textRenderer, controls, alignedTextX(controls, padding, config.width, alignment), config.height - 20, accent, true)
+        graphics.text(textRenderer, controls, alignedTextX(controls, padding, config.width, alignment), config.height - 29, accent, true)
+        graphics.text(textRenderer, dismissControl, alignedTextX(dismissControl, padding, config.width, alignment), config.height - 18, accent, true)
         renderProgressBar(graphics, padding, config.width, config.height, remainingProgress, progressBack, progressFill)
         pose.popMatrix()
     }
