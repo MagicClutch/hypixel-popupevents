@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "popupevents",
+  "version": "${version}",
+  "name": "Hypixel Popupevents",
+  "description": "Client-side Hypixel party, trade, friend, guild, and duel request HUD popups.",
+  "authors": [
+    "elias"
+  ],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/popupevents/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "de.hypixel.popupevents.client.PopupeventsClient"
+    ],
+    "modmenu": [
+      "de.hypixel.popupevents.client.config.ModMenuIntegration"
+    ],
+    "main": [
+      "de.hypixel.popupevents.Popupevents"
+    ]
+  },
+  "mixins": [
+    "popupevents.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-language-kotlin": ">=${kotlin_loader_version}",
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version}"
+  },
+  "suggests": {
+    "modmenu": "*"
+  }
+}
