@@ -68,14 +68,11 @@ object ChatComponentParser {
                 command.startsWith("/p accept ", ignoreCase = true) ||
                 (command.startsWith("/p ", ignoreCase = true) && !command.startsWithAny("/p deny ", "/p decline ", "/p reject "))
         }
-        val partyDeclineCommand = commands.firstCommand("/party deny ", "/party decline ", "/party reject ", "/p deny ", "/p decline ")
         val friendAcceptCommand = commands.firstCommand("/friend accept ", "/f accept ")
         val friendDeclineCommand = commands.firstCommand("/friend deny ", "/friend decline ", "/friend reject ", "/f deny ", "/f decline ")
         val guildAcceptCommand = commands.firstCommand("/guild accept ", "/g accept ")
             ?: extractCommandFromText(flatText, "/guild accept ", "/g accept ")
-        val guildDeclineCommand = commands.firstCommand("/guild deny ", "/guild decline ", "/guild reject ", "/g deny ", "/g decline ")
         val duelAcceptCommand = commands.firstCommand("/duel accept ")
-        val duelDeclineCommand = commands.firstCommand("/duel deny ", "/duel decline ", "/duel reject ")
 
         val request = when {
             ConfigManager.config.tradePopups && lowered.contains("trade request") -> {
@@ -89,7 +86,7 @@ object ChatComponentParser {
                     RequestType.PARTY,
                     player,
                     partyAcceptCommand ?: "/p $player",
-                    partyDeclineCommand ?: "/party deny $player"
+                    null
                 )
             }
 
@@ -109,7 +106,7 @@ object ChatComponentParser {
                     RequestType.GUILD,
                     player,
                     guildAcceptCommand ?: "/guild accept $player",
-                    guildDeclineCommand ?: "/guild deny $player"
+                    null
                 )
             }
 
@@ -119,7 +116,7 @@ object ChatComponentParser {
                     RequestType.DUEL,
                     player,
                     duelAcceptCommand ?: "/duel accept $player",
-                    duelDeclineCommand ?: "/duel deny $player"
+                    null
                 )
             }
 

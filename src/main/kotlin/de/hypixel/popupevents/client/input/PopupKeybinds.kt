@@ -12,9 +12,11 @@ import net.minecraft.resources.Identifier
 object PopupKeybinds {
     private lateinit var accept: KeyMapping
     private lateinit var decline: KeyMapping
+    private lateinit var dismiss: KeyMapping
     private val category = KeyMapping.Category.register(Identifier.fromNamespaceAndPath(MOD_ID, "keys"))
     private var acceptWasDown = false
     private var declineWasDown = false
+    private var dismissWasDown = false
 
     fun register() {
         accept = KeyMappingHelper.registerKeyMapping(
@@ -22,6 +24,9 @@ object PopupKeybinds {
         )
         decline = KeyMappingHelper.registerKeyMapping(
             KeyMapping("key.popupevents.decline", InputConstants.KEY_N, category)
+        )
+        dismiss = KeyMappingHelper.registerKeyMapping(
+            KeyMapping("key.popupevents.dismiss", InputConstants.KEY_X, category)
         )
 
         ClientTickEvents.END_CLIENT_TICK.register(ClientTickEvents.EndTick {
@@ -33,6 +38,7 @@ object PopupKeybinds {
         if (Minecraft.getInstance().gui.screen() != null) {
             acceptWasDown = accept.isDown
             declineWasDown = decline.isDown
+            dismissWasDown = dismiss.isDown
             return
         }
 
@@ -48,6 +54,12 @@ object PopupKeybinds {
             declined = true
         }
 
+        var dismissed = false
+        while (dismiss.consumeClick()) {
+            PopupManager.dismiss()
+            dismissed = true
+        }
+
         val acceptDown = accept.isDown
         if (!accepted && acceptDown && !acceptWasDown) {
             PopupManager.accept()
@@ -59,5 +71,11 @@ object PopupKeybinds {
             PopupManager.decline()
         }
         declineWasDown = declineDown
+
+        val dismissDown = dismiss.isDown
+        if (!dismissed && dismissDown && !dismissWasDown) {
+            PopupManager.dismiss()
+        }
+        dismissWasDown = dismissDown
     }
 }

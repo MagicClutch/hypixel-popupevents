@@ -1,5 +1,7 @@
 {
   "key.popupevents.accept": "Accept Popup",
   "key.popupevents.decline": "Decline Popup",
-  "category.popupevents.keys": "Hypixel PopUps"
+  "key.popupevents.dismiss": "Dismiss Popup",
+  "category.popupevents.keys": "Hypixel Popups",
+  "key.category.popupevents.keys": "Hypixel Popups"
 }
