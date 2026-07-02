@@ -15,7 +15,6 @@ data class PopupConfig(
     var durationSeconds: Double = 5.0,
     var backgroundOpacity: Double = 0.72,
     var backgroundEnabled: Boolean = true,
-    var roundedCorners: Boolean = true,
     var textAlignment: PopupTextAlignment? = PopupTextAlignment.CENTER,
     var animations: Boolean = true,
     var animationSpeed: Double = 1.0,

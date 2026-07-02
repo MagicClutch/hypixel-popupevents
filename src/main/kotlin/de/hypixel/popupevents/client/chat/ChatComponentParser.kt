@@ -34,6 +34,8 @@ object ChatComponentParser {
         Regex("""^([A-Za-z0-9_]{1,16}) wants to be your friend\b""")
     )
     private val guildNamePatterns = listOf(
+        Regex("""(?:\[[^\]]+]\s*)?([A-Za-z0-9_]{1,16}) has invited you to join (?:their|a|the) guild\b"""),
+        Regex("""(?:\[[^\]]+]\s*)?([A-Za-z0-9_]{1,16}) invited you to (?:their|a|the) guild\b"""),
         Regex("""^([A-Za-z0-9_]{1,16}) invited you to (?:their|a|the) guild\b"""),
         Regex("""^Guild invite from ([A-Za-z0-9_]{1,16})\b"""),
         Regex("""^([A-Za-z0-9_]{1,16}) has invited you to join (?:their|a|the) guild\b"""),
@@ -70,6 +72,7 @@ object ChatComponentParser {
         val friendAcceptCommand = commands.firstCommand("/friend accept ", "/f accept ")
         val friendDeclineCommand = commands.firstCommand("/friend deny ", "/friend decline ", "/friend reject ", "/f deny ", "/f decline ")
         val guildAcceptCommand = commands.firstCommand("/guild accept ", "/g accept ")
+            ?: extractCommandFromText(flatText, "/guild accept ", "/g accept ")
         val guildDeclineCommand = commands.firstCommand("/guild deny ", "/guild decline ", "/guild reject ", "/g deny ", "/g decline ")
         val duelAcceptCommand = commands.firstCommand("/duel accept ")
         val duelDeclineCommand = commands.firstCommand("/duel deny ", "/duel decline ", "/duel reject ")
@@ -178,6 +181,14 @@ object ChatComponentParser {
     private fun extractPlayerFromCommand(command: String?): String? {
         if (command == null) return null
         return command.split(Regex("""\s+""")).lastOrNull()?.takeIf { it.matches(Regex("""[A-Za-z0-9_]{1,16}""")) }
+    }
+
+    private fun extractCommandFromText(text: String, vararg prefixes: String): String? {
+        val flattened = text.replace('\n', ' ')
+        return prefixes.firstNotNullOfOrNull { prefix ->
+            val pattern = Regex("""${Regex.escape(prefix)}([A-Za-z0-9_]{1,16})\b""", RegexOption.IGNORE_CASE)
+            pattern.find(flattened)?.groupValues?.getOrNull(1)?.let { player -> "$prefix$player" }
+        }
     }
 
     private fun List<String>.firstCommand(vararg prefixes: String): String? {

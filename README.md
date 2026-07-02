@@ -66,7 +66,7 @@ To use an alt account, add it to your local DevAuth config as another account, t
 Open Mod Menu, select `Hypixel Popupevents`, and press the config button. The YACL screen exposes:
 
 - General: enable toggles for the mod and each request popup type.
-- Popup: top-center default position, manual position, dimensions, scale, duration, opacity, background, rounded-corner toggle, and an editor.
+- Popup: top-center default position, manual position, dimensions, scale, duration, opacity, background, text alignment, and an editor.
 - Popup editor: drag the popup to move it, use the scroll wheel over the popup to resize it, or use `Center X`, `Top`, and `Reset`.
 - Animation: animation toggle, speed, and fade duration.
 - Debug: raw component logging, JSON logging, and extracted command logging.

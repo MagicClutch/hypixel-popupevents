@@ -53,7 +53,6 @@ object ConfigScreenFactory {
             .option(doubleOption("Popup duration", ConfigManager.config.durationSeconds, 1.0, 30.0, 0.25) { ConfigManager.config.durationSeconds = it })
             .option(doubleOption("Background opacity", ConfigManager.config.backgroundOpacity, 0.0, 1.0, 0.05) { ConfigManager.config.backgroundOpacity = it })
             .option(booleanOption("Background enabled", ConfigManager.config.backgroundEnabled) { ConfigManager.config.backgroundEnabled = it })
-            .option(booleanOption("Rounded corners", ConfigManager.config.roundedCorners) { ConfigManager.config.roundedCorners = it })
             .option(textAlignmentOption())
             .build()
     }
@@ -129,7 +128,6 @@ object ConfigScreenFactory {
         "Enable guild popups" -> ConfigManager.config.guildPopups
         "Enable duel popups" -> ConfigManager.config.duelPopups
         "Background enabled" -> ConfigManager.config.backgroundEnabled
-        "Rounded corners" -> ConfigManager.config.roundedCorners
         "Enable animations" -> ConfigManager.config.animations
         "Enable debug logging" -> ConfigManager.config.debugLogging
         "Print detected JSON chat component" -> ConfigManager.config.printJson
