@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "2.4.0"
-    id("net.fabricmc.fabric-loom") version "1.17-SNAPSHOT"
+    id("net.fabricmc.fabric-loom-remap") version "1.17-SNAPSHOT"
     id("maven-publish")
 }
 
@@ -14,7 +14,7 @@ base {
     archivesName.set(project.property("archives_base_name") as String)
 }
 
-val targetJavaVersion = 25
+val targetJavaVersion = 21
 java {
     toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
     // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
@@ -43,19 +43,20 @@ repositories {
 dependencies {
     // To change the versions see the gradle.properties file
     minecraft("com.mojang:minecraft:${project.property("minecraft_version")}")
-    implementation("net.fabricmc:fabric-loader:${project.property("loader_version")}")
-    implementation("net.fabricmc:fabric-language-kotlin:${project.property("kotlin_loader_version")}")
+    mappings(loom.officialMojangMappings())
+    add("modImplementation", "net.fabricmc:fabric-loader:${project.property("loader_version")}")
+    add("modImplementation", "net.fabricmc:fabric-language-kotlin:${project.property("kotlin_loader_version")}")
 
-    implementation("net.fabricmc.fabric-api:fabric-api:${project.property("fabric_version")}")
-    implementation("net.fabricmc.fabric-api:fabric-command-api-v2:3.0.5+e2bdee784c")
-    implementation("net.fabricmc.fabric-api:fabric-message-api-v1:7.0.5+dae8ce3e4c")
-    implementation("net.fabricmc.fabric-api:fabric-rendering-v1:23.3.0+e9207d814c")
-    implementation("net.fabricmc.fabric-api:fabric-key-mapping-api-v1:2.0.4+e2bdee784c")
-    implementation("net.fabricmc.fabric-api:fabric-lifecycle-events-v1:4.1.1+df84eb3d4c")
-    implementation("maven.modrinth:yacl:${project.property("yacl_version")}")
+    add("modImplementation", "net.fabricmc.fabric-api:fabric-api:${project.property("fabric_version")}")
+    add("modImplementation", "net.fabricmc.fabric-api:fabric-command-api-v2:2.4.7+6b42a6003e")
+    add("modImplementation", "net.fabricmc.fabric-api:fabric-message-api-v1:6.1.12+4ebb5c083e")
+    add("modImplementation", "net.fabricmc.fabric-api:fabric-rendering-v1:16.2.9+7edacff13e")
+    add("modImplementation", "net.fabricmc.fabric-api:fabric-key-binding-api-v1:1.1.7+4fc5413f3e")
+    add("modImplementation", "net.fabricmc.fabric-api:fabric-lifecycle-events-v1:2.6.15+4ebb5c083e")
+    add("modImplementation", "maven.modrinth:yacl:${project.property("yacl_version")}")
     include("maven.modrinth:yacl:${project.property("yacl_version")}")
-    implementation("maven.modrinth:modmenu:${project.property("modmenu_version")}")
-    runtimeOnly("me.djtheredstoner:DevAuth-fabric:${project.property("devauth_version")}")
+    add("modImplementation", "maven.modrinth:modmenu:${project.property("modmenu_version")}")
+    add("modRuntimeOnly", "me.djtheredstoner:DevAuth-fabric:${project.property("devauth_version")}")
 }
 
 tasks.processResources {
@@ -88,6 +89,12 @@ tasks.withType<KotlinCompile>().configureEach {
 }
 
 tasks.withType<JavaExec>().configureEach {
+    javaLauncher.set(
+        javaToolchains.launcherFor {
+            languageVersion.set(JavaLanguageVersion.of(targetJavaVersion))
+        }
+    )
+
     if (name == "runClient") {
         jvmArgs(
             "-Ddevauth.enabled=true",
