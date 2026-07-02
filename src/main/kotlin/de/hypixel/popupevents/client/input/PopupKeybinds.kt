@@ -30,7 +30,7 @@ object PopupKeybinds {
     }
 
     private fun handleKeybinds() {
-        if (Minecraft.getInstance().screen != null) {
+        if (Minecraft.getInstance().gui.screen() != null) {
             acceptWasDown = accept.isDown
             declineWasDown = decline.isDown
             return
