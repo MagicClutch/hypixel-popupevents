@@ -19,7 +19,7 @@ object PopupTestCommands {
                 literal("hypixelrequestpopups")
                     .executes {
                         DeferredScreenOpener.open {
-                            ConfigScreenFactory.create(Minecraft.getInstance().screen)
+                            ConfigScreenFactory.create(Minecraft.getInstance().gui.screen())
                         }
                         Command.SINGLE_SUCCESS
                     }

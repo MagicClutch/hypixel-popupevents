@@ -16,7 +16,7 @@ object DeferredScreenOpener {
             }
 
             pendingFactory = null
-            client.setScreen(factory())
+            client.setScreenAndShow(factory())
         })
     }
 
