@@ -18,6 +18,12 @@ object PopupKeybinds {
     private var declineWasDown = false
     private var dismissWasDown = false
 
+    fun acceptKeyName(): String = accept.translatedKeyMessage.string
+
+    fun declineKeyName(): String = decline.translatedKeyMessage.string
+
+    fun dismissKeyName(): String = dismiss.translatedKeyMessage.string
+
     fun register() {
         accept = KeyMappingHelper.registerKeyMapping(
             KeyMapping("key.popupevents.accept", InputConstants.KEY_Y, category)

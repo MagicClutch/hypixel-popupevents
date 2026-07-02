@@ -3,6 +3,7 @@ package de.hypixel.popupevents.client.render
 import de.hypixel.popupevents.client.MOD_ID
 import de.hypixel.popupevents.client.config.ConfigManager
 import de.hypixel.popupevents.client.config.PopupTextAlignment
+import de.hypixel.popupevents.client.input.PopupKeybinds
 import de.hypixel.popupevents.client.popup.PopupManager
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElement
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry
@@ -82,13 +83,19 @@ object PopupHudRenderer {
 
         val title = request.title
         val question = request.question
-        val controls = "[Y] Accept      [N] Decline"
-        val dismissControl = "[X] Dismiss"
         val color = (textAlpha shl 24) or 0xFFFFFF
-        val accent = (textAlpha shl 24) or 0x80FF80
+        val acceptColor = (textAlpha shl 24) or 0x55FF55
+        val declineColor = (textAlpha shl 24) or 0xFF5555
+        val dismissColor = (textAlpha shl 24) or 0x55DDFF
         val progressBack = ((alpha * 95.0f).roundToInt().coerceIn(0, 255) shl 24) or 0x1F1F1F
         val progressFill = (textAlpha shl 24) or 0x55DDFF
         val alignment = config.textAlignment ?: PopupTextAlignment.CENTER
+        val controls = listOf(
+            TextSegment("[${PopupKeybinds.acceptKeyName()}] Accept", acceptColor),
+            TextSegment("      ", color),
+            TextSegment("[${PopupKeybinds.declineKeyName()}] Decline", declineColor)
+        )
+        val dismissControl = listOf(TextSegment("[${PopupKeybinds.dismissKeyName()}] Dismiss", dismissColor))
 
         val pose = graphics.pose()
         pose.pushMatrix()
@@ -96,10 +103,26 @@ object PopupHudRenderer {
         pose.scale(scale, scale)
         graphics.text(textRenderer, title, alignedTextX(title, padding, config.width, alignment), 10, color, true)
         graphics.text(textRenderer, question, alignedTextX(question, padding, config.width, alignment), 28, color, true)
-        graphics.text(textRenderer, controls, alignedTextX(controls, padding, config.width, alignment), config.height - 29, accent, true)
-        graphics.text(textRenderer, dismissControl, alignedTextX(dismissControl, padding, config.width, alignment), config.height - 18, accent, true)
+        renderSegments(graphics, controls, padding, config.width, alignment, config.height - 29)
+        renderSegments(graphics, dismissControl, padding, config.width, alignment, config.height - 18)
         renderProgressBar(graphics, padding, config.width, config.height, remainingProgress, progressBack, progressFill)
         pose.popMatrix()
+    }
+
+    private fun renderSegments(
+        graphics: GuiGraphicsExtractor,
+        segments: List<TextSegment>,
+        padding: Int,
+        width: Int,
+        alignment: PopupTextAlignment,
+        y: Int
+    ) {
+        val textRenderer = Minecraft.getInstance().font
+        var x = alignedTextX(segments.joinToString("") { it.text }, padding, width, alignment)
+        for (segment in segments) {
+            graphics.text(textRenderer, segment.text, x, y, segment.color, true)
+            x += textRenderer.width(segment.text)
+        }
     }
 
     private fun renderProgressBar(
@@ -135,4 +158,6 @@ object PopupHudRenderer {
     }
 
     data class Bounds(val x: Int, val y: Int, val width: Int, val height: Int)
+
+    private data class TextSegment(val text: String, val color: Int)
 }
