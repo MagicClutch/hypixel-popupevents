@@ -7,7 +7,7 @@ import de.hypixel.popupevents.client.model.RequestType
 import de.hypixel.popupevents.client.popup.PopupManager
 import de.hypixel.popupevents.client.screen.DeferredScreenOpener
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback
-import net.fabricmc.fabric.api.client.command.v2.ClientCommands.literal
+import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal
 import net.minecraft.client.Minecraft
 
 object PopupTestCommands {
