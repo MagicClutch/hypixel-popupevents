@@ -88,6 +88,10 @@ tasks.withType<KotlinCompile>().configureEach {
 }
 
 tasks.withType<JavaExec>().configureEach {
+    javaLauncher.set(javaToolchains.launcherFor {
+        languageVersion.set(JavaLanguageVersion.of(targetJavaVersion))
+    })
+
     if (name == "runClient") {
         jvmArgs(
             "-Ddevauth.enabled=true",
