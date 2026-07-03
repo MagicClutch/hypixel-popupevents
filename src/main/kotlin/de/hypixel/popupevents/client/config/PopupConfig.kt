@@ -1,132 +1,135 @@
 package de.hypixel.popupevents.client.config
 
-import com.teamresourceful.resourcefulconfig.api.annotations.Comment
-import com.teamresourceful.resourcefulconfig.api.annotations.Config
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigButton
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigEntry
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigInfo
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption
-import de.hypixel.popupevents.client.MOD_ID
-import de.hypixel.popupevents.client.MOD_NAME
-import de.hypixel.popupevents.client.screen.DeferredScreenOpener
-
-@ConfigInfo(
-    title = MOD_NAME,
-    description = "Client-side Hypixel party, trade, friend, guild, and duel request HUD popups."
-)
-@Config(value = MOD_ID)
 object PopupConfig {
-    @JvmField
-    @ConfigEntry(id = "enabled", translation = "Enable mod")
-    var enabled: Boolean = true
+    var enabled: Boolean
+        get() = PopupConfigData.enabled
+        set(value) {
+            PopupConfigData.enabled = value
+        }
 
-    @JvmField
-    @ConfigEntry(id = "tradePopups", translation = "Enable trade popups")
-    var tradePopups: Boolean = true
+    var tradePopups: Boolean
+        get() = PopupConfigData.tradePopups
+        set(value) {
+            PopupConfigData.tradePopups = value
+        }
 
-    @JvmField
-    @ConfigEntry(id = "partyPopups", translation = "Enable party popups")
-    var partyPopups: Boolean = true
+    var partyPopups: Boolean
+        get() = PopupConfigData.partyPopups
+        set(value) {
+            PopupConfigData.partyPopups = value
+        }
 
-    @JvmField
-    @ConfigEntry(id = "friendPopups", translation = "Enable friend popups")
-    var friendPopups: Boolean = true
+    var friendPopups: Boolean
+        get() = PopupConfigData.friendPopups
+        set(value) {
+            PopupConfigData.friendPopups = value
+        }
 
-    @JvmField
-    @ConfigEntry(id = "guildPopups", translation = "Enable guild popups")
-    var guildPopups: Boolean = true
+    var guildPopups: Boolean
+        get() = PopupConfigData.guildPopups
+        set(value) {
+            PopupConfigData.guildPopups = value
+        }
 
-    @JvmField
-    @ConfigEntry(id = "duelPopups", translation = "Enable duel popups")
-    var duelPopups: Boolean = true
+    var duelPopups: Boolean
+        get() = PopupConfigData.duelPopups
+        set(value) {
+            PopupConfigData.duelPopups = value
+        }
 
-    @JvmField
-    @ConfigButton(title = "Popup editor", text = "Open Editor")
-    @Comment("Drag the popup and use the scroll wheel to resize it.")
-    val openEditor: Runnable = Runnable {
-        DeferredScreenOpener.open { PopupPositionEditScreen() }
-    }
+    var x: Int
+        get() = PopupConfigData.x
+        set(value) {
+            PopupConfigData.x = value
+        }
 
-    @JvmField
-    @ConfigOption.Hidden
-    @ConfigEntry(id = "x")
-    var x: Int = -1
+    var y: Int
+        get() = PopupConfigData.y
+        set(value) {
+            PopupConfigData.y = value
+        }
 
-    @JvmField
-    @ConfigOption.Hidden
-    @ConfigEntry(id = "y")
-    var y: Int = 20
+    var width: Int
+        get() = PopupConfigData.width
+        set(value) {
+            PopupConfigData.width = value
+        }
 
-    @JvmField
-    @ConfigOption.Hidden
-    @ConfigEntry(id = "width")
-    var width: Int = 260
+    var height: Int
+        get() = PopupConfigData.height
+        set(value) {
+            PopupConfigData.height = value
+        }
 
-    @JvmField
-    @ConfigOption.Hidden
-    @ConfigEntry(id = "height")
-    var height: Int = 76
+    var scale: Double
+        get() = PopupConfigData.scale
+        set(value) {
+            PopupConfigData.scale = value
+        }
 
-    @JvmField
-    @ConfigOption.Hidden
-    @ConfigEntry(id = "scale")
-    var scale: Double = 1.0
+    var durationSeconds: Double
+        get() = PopupConfigData.durationSeconds
+        set(value) {
+            PopupConfigData.durationSeconds = value
+        }
 
-    @JvmField
-    @ConfigOption.Separator(value = "Popup", description = "Display and layout options.")
-    @ConfigOption.Slider
-    @ConfigOption.Range(min = 1.0, max = 30.0)
-    @ConfigEntry(id = "durationSeconds", translation = "Popup duration")
-    var durationSeconds: Double = 5.0
+    var backgroundOpacity: Double
+        get() = PopupConfigData.backgroundOpacity
+        set(value) {
+            PopupConfigData.backgroundOpacity = value
+        }
 
-    @JvmField
-    @ConfigOption.Slider
-    @ConfigOption.Range(min = 0.0, max = 1.0)
-    @ConfigEntry(id = "backgroundOpacity", translation = "Background opacity")
-    var backgroundOpacity: Double = 0.72
+    var backgroundEnabled: Boolean
+        get() = PopupConfigData.backgroundEnabled
+        set(value) {
+            PopupConfigData.backgroundEnabled = value
+        }
 
-    @JvmField
-    @ConfigEntry(id = "backgroundEnabled", translation = "Background enabled")
-    var backgroundEnabled: Boolean = true
+    var textAlignment: PopupTextAlignment
+        get() = PopupConfigData.textAlignment
+        set(value) {
+            PopupConfigData.textAlignment = value
+        }
 
-    @JvmField
-    @ConfigEntry(id = "textAlignment", translation = "Text alignment")
-    @Comment("Controls how the popup title, question, and key hints are aligned.")
-    var textAlignment: PopupTextAlignment = PopupTextAlignment.CENTER
+    var animations: Boolean
+        get() = PopupConfigData.animations
+        set(value) {
+            PopupConfigData.animations = value
+        }
 
-    @JvmField
-    @ConfigOption.Separator(value = "Animation", description = "Popup transition timing.")
-    @ConfigEntry(id = "animations", translation = "Enable animations")
-    var animations: Boolean = true
+    var animationSpeed: Double
+        get() = PopupConfigData.animationSpeed
+        set(value) {
+            PopupConfigData.animationSpeed = value
+        }
 
-    @JvmField
-    @ConfigOption.Slider
-    @ConfigOption.Range(min = 0.1, max = 4.0)
-    @ConfigEntry(id = "animationSpeed", translation = "Animation speed")
-    var animationSpeed: Double = 1.0
+    var fadeDurationSeconds: Double
+        get() = PopupConfigData.fadeDurationSeconds
+        set(value) {
+            PopupConfigData.fadeDurationSeconds = value
+        }
 
-    @JvmField
-    @ConfigOption.Slider
-    @ConfigOption.Range(min = 0.05, max = 2.0)
-    @ConfigEntry(id = "fadeDurationSeconds", translation = "Fade duration")
-    var fadeDurationSeconds: Double = 0.22
+    var slideUpDurationSeconds: Double
+        get() = PopupConfigData.slideUpDurationSeconds
+        set(value) {
+            PopupConfigData.slideUpDurationSeconds = value
+        }
 
-    @JvmField
-    @ConfigOption.Slider
-    @ConfigOption.Range(min = 0.1, max = 2.0)
-    @ConfigEntry(id = "slideUpDurationSeconds", translation = "Slide up duration")
-    var slideUpDurationSeconds: Double = 0.5
+    var debugLogging: Boolean
+        get() = PopupConfigData.debugLogging
+        set(value) {
+            PopupConfigData.debugLogging = value
+        }
 
-    @JvmField
-    @ConfigOption.Separator(value = "Debug", description = "Development logging options.")
-    @ConfigEntry(id = "debugLogging", translation = "Enable debug logging")
-    var debugLogging: Boolean = false
+    var printJson: Boolean
+        get() = PopupConfigData.printJson
+        set(value) {
+            PopupConfigData.printJson = value
+        }
 
-    @JvmField
-    @ConfigEntry(id = "printJson", translation = "Print detected JSON chat component")
-    var printJson: Boolean = false
-
-    @JvmField
-    @ConfigEntry(id = "printCommands", translation = "Print extracted commands")
-    var printCommands: Boolean = false
+    var printCommands: Boolean
+        get() = PopupConfigData.printCommands
+        set(value) {
+            PopupConfigData.printCommands = value
+        }
 }

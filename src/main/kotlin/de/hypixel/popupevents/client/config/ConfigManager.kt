@@ -11,17 +11,17 @@ object ConfigManager {
 
     fun load() {
         if (!registered) {
-            configurator.register(PopupConfig::class.java)
+            configurator.register(PopupConfigData::class.java)
             registered = true
         } else {
-            configurator.loadConfig(PopupConfig::class.java)
+            configurator.loadConfig(PopupConfigData::class.java)
         }
         clamp()
         save()
     }
 
     fun save() {
-        configurator.saveConfig(PopupConfig::class.java)
+        configurator.saveConfig(PopupConfigData::class.java)
     }
 
     fun update(block: (PopupConfig) -> Unit) {

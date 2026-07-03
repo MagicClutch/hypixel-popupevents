@@ -5,7 +5,7 @@ import net.minecraft.client.gui.screens.Screen
 
 object ConfigScreenFactory {
     fun create(parent: Screen?): Screen {
-        return ResourcefulConfigScreen.make(ConfigManager.configurator, PopupConfig::class.java)
+        return ResourcefulConfigScreen.make(ConfigManager.configurator, PopupConfigData::class.java)
             .withParent(parent)
             .build()
     }
