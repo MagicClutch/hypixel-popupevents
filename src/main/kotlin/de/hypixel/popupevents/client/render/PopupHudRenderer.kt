@@ -89,7 +89,7 @@ object PopupHudRenderer {
         val dismissColor = (textAlpha shl 24) or 0x55DDFF
         val progressBack = ((alpha * 95.0f).roundToInt().coerceIn(0, 255) shl 24) or 0x1F1F1F
         val progressFill = (textAlpha shl 24) or 0x55DDFF
-        val alignment = config.textAlignment ?: PopupTextAlignment.CENTER
+        val alignment = config.textAlignment
         val controls = listOf(
             TextSegment("[${PopupKeybinds.acceptKeyName()}] Accept", acceptColor),
             TextSegment("      ", color),
