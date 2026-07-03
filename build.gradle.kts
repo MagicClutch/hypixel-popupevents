@@ -29,14 +29,14 @@ repositories {
     maven("https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1") {
         name = "DevAuth"
     }
-    maven("https://maven.isxander.dev/releases") {
-        name = "Xander Maven"
-    }
     maven("https://api.modrinth.com/maven") {
         name = "Modrinth"
     }
     maven("https://maven.terraformersmc.com/releases") {
         name = "TerraformersMC"
+    }
+    maven("https://maven.teamresourceful.com/repository/maven-public/") {
+        name = "Team Resourceful Maven"
     }
 }
 
@@ -52,8 +52,8 @@ dependencies {
     implementation("net.fabricmc.fabric-api:fabric-rendering-v1:23.3.0+e9207d814c")
     implementation("net.fabricmc.fabric-api:fabric-key-mapping-api-v1:2.0.4+e2bdee784c")
     implementation("net.fabricmc.fabric-api:fabric-lifecycle-events-v1:4.1.1+df84eb3d4c")
-    implementation("maven.modrinth:yacl:${project.property("yacl_version")}")
-    include("maven.modrinth:yacl:${project.property("yacl_version")}")
+    implementation("com.teamresourceful.resourcefulconfig:resourcefulconfig-fabric-26.1:${project.property("resourceful_config_version")}")
+    include("com.teamresourceful.resourcefulconfig:resourcefulconfig-fabric-26.1:${project.property("resourceful_config_version")}")
     implementation("maven.modrinth:modmenu:${project.property("modmenu_version")}")
     runtimeOnly("me.djtheredstoner:DevAuth-fabric:${project.property("devauth_version")}")
 }

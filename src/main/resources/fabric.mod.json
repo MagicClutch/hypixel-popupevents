@@ -15,9 +15,6 @@
     "client": [
       "de.hypixel.popupevents.client.PopupeventsClient"
     ],
-    "modmenu": [
-      "de.hypixel.popupevents.client.config.ModMenuIntegration"
-    ],
     "main": [
       "de.hypixel.popupevents.Popupevents"
     ]
@@ -29,6 +26,7 @@
     "fabricloader": ">=${loader_version}",
     "fabric-language-kotlin": ">=${kotlin_loader_version}",
     "fabric-api": "*",
+    "resourcefulconfig": "*",
     "minecraft": "${minecraft_version}"
   },
   "suggests": {
