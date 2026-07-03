@@ -8,7 +8,7 @@
     "elias"
   ],
   "contact": {},
-  "license": "All-Rights-Reserved",
+  "license": "MIT",
   "icon": "assets/popupevents/icon.png",
   "environment": "client",
   "entrypoints": {
