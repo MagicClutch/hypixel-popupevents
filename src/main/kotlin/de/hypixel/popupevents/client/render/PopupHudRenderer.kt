@@ -9,7 +9,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElement
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.hud.VanillaHudElements
 import net.minecraft.client.Minecraft
-import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.resources.Identifier
 import kotlin.math.roundToInt
 
@@ -22,12 +22,12 @@ object PopupHudRenderer {
         )
     }
 
-    private fun render(graphics: GuiGraphics) {
+    private fun render(graphics: GuiGraphicsExtractor) {
         val state = PopupManager.current() ?: return
         renderRequest(graphics, state.request, state.alpha, state.yOffset, state.remainingProgress)
     }
 
-    fun renderPreview(graphics: GuiGraphics) {
+    fun renderPreview(graphics: GuiGraphicsExtractor) {
         renderRequest(
             graphics,
             de.hypixel.popupevents.client.model.PopupRequest(
@@ -52,7 +52,7 @@ object PopupHudRenderer {
     }
 
     private fun renderRequest(
-        graphics: GuiGraphics,
+        graphics: GuiGraphicsExtractor,
         request: de.hypixel.popupevents.client.model.PopupRequest,
         alpha: Float,
         yOffset: Float,
@@ -101,8 +101,8 @@ object PopupHudRenderer {
         pose.pushMatrix()
         pose.translate(x.toFloat(), y.toFloat())
         pose.scale(scale, scale)
-        graphics.drawString(textRenderer, title, alignedTextX(title, padding, config.width, alignment), 10, color, true)
-        graphics.drawString(textRenderer, question, alignedTextX(question, padding, config.width, alignment), 28, color, true)
+        graphics.text(textRenderer, title, alignedTextX(title, padding, config.width, alignment), 10, color, true)
+        graphics.text(textRenderer, question, alignedTextX(question, padding, config.width, alignment), 28, color, true)
         renderSegments(graphics, controls, padding, config.width, alignment, config.height - 29)
         renderSegments(graphics, dismissControl, padding, config.width, alignment, config.height - 18)
         renderProgressBar(graphics, padding, config.width, config.height, remainingProgress, progressBack, progressFill)
@@ -110,7 +110,7 @@ object PopupHudRenderer {
     }
 
     private fun renderSegments(
-        graphics: GuiGraphics,
+        graphics: GuiGraphicsExtractor,
         segments: List<TextSegment>,
         padding: Int,
         width: Int,
@@ -120,13 +120,13 @@ object PopupHudRenderer {
         val textRenderer = Minecraft.getInstance().font
         var x = alignedTextX(segments.joinToString("") { it.text }, padding, width, alignment)
         for (segment in segments) {
-            graphics.drawString(textRenderer, segment.text, x, y, segment.color, true)
+            graphics.text(textRenderer, segment.text, x, y, segment.color, true)
             x += textRenderer.width(segment.text)
         }
     }
 
     private fun renderProgressBar(
-        graphics: GuiGraphics,
+        graphics: GuiGraphicsExtractor,
         padding: Int,
         width: Int,
         height: Int,

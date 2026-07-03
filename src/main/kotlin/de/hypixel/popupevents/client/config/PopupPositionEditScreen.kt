@@ -2,7 +2,7 @@ package de.hypixel.popupevents.client.config
 
 import de.hypixel.popupevents.client.render.PopupHudRenderer
 import net.minecraft.client.Minecraft
-import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.input.MouseButtonEvent
@@ -44,13 +44,13 @@ class PopupPositionEditScreen : Screen(Component.literal("Popup Editor")) {
         )
     }
 
-    override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int, delta: Float) {
-        super.render(graphics, mouseX, mouseY, delta)
+    override fun extractRenderState(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, delta: Float) {
+        super.extractRenderState(graphics, mouseX, mouseY, delta)
         PopupHudRenderer.renderPreview(graphics)
 
         val font = Minecraft.getInstance().font
-        graphics.drawString(font, "Drag popup to move", 10, height - 34, 0xAAAAAA, true)
-        graphics.drawString(font, "Scroll wheel over popup: change size", 10, height - 20, 0xAAAAAA, true)
+        graphics.text(font, "Drag popup to move", 10, height - 34, 0xAAAAAA, true)
+        graphics.text(font, "Scroll wheel over popup: change size", 10, height - 20, 0xAAAAAA, true)
     }
 
     override fun mouseScrolled(mouseX: Double, mouseY: Double, horizontalAmount: Double, verticalAmount: Double): Boolean {

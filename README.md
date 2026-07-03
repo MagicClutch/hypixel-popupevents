@@ -17,17 +17,17 @@ Client-side Fabric mod that detects Hypixel party invites, trade requests, frien
 
 ## Requirements
 
-- Java 21
-- Minecraft `1.21.11`
+- Java 25
+- Minecraft `26.1.2`
 - Fabric Loader `0.19.3`
-- Fabric API `0.141.2+1.21.11`
+- Fabric API `0.154.0+26.1.2`
 - Fabric Language Kotlin `1.13.12+kotlin.2.4.0`
-- YACL `3.8.1+1.21.11-fabric` is bundled inside the mod jar.
-- Mod Menu `17.0.0-beta.1`
+- Resourceful Config `4.0.1` is bundled inside the mod jar.
+- Mod Menu `18.0.0-alpha.8`
 
 ## Build
 
-This repository targets the Fabric 1.21.11 unobfuscated toolchain:
+This repository targets the Fabric 26.1.2 unobfuscated toolchain:
 
 ```powershell
 .\gradlew.bat build
