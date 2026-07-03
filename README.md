@@ -1,6 +1,6 @@
 # Hypixel Request Popups
 
-Client-side Fabric mod for Minecraft `26.1.2` that detects Hypixel party invites, trade requests, friend requests, guild invites, and duel requests from real chat `Component` data and shows a non-pausing HUD popup with configurable accept/decline keybinds.
+Client-side Fabric mod that detects Hypixel party invites, trade requests, friend requests, guild invites, and duel requests from real chat `Component` data and shows a non-pausing HUD popup with configurable accept/decline keybinds.
 
 ## Features
 
@@ -17,17 +17,17 @@ Client-side Fabric mod for Minecraft `26.1.2` that detects Hypixel party invites
 
 ## Requirements
 
-- Java 25
-- Minecraft `26.1.2`
+- Java 21
+- Minecraft `1.21.11`
 - Fabric Loader `0.19.3`
-- Fabric API `0.154.0+26.1.2`
+- Fabric API `0.141.2+1.21.11`
 - Fabric Language Kotlin `1.13.12+kotlin.2.4.0`
-- YACL `3.9.4+26.1-fabric` is bundled inside the mod jar.
-- Mod Menu `18.0.0-alpha.8`
+- YACL `3.8.1+1.21.11-fabric` is bundled inside the mod jar.
+- Mod Menu `17.0.0-beta.1`
 
 ## Build
 
-This repository targets the Fabric 26.1 unobfuscated toolchain:
+This repository targets the Fabric 1.21.11 unobfuscated toolchain:
 
 ```powershell
 .\gradlew.bat build
