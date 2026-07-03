@@ -1,6 +1,6 @@
 # Hypixel Request Popups
 
-Client-side Fabric mod for Minecraft `1.21.11` that detects Hypixel party invites, trade requests, friend requests, guild invites, and duel requests from real chat `Component` data and shows a non-pausing HUD popup with configurable accept/decline keybinds.
+Client-side Fabric mod that detects Hypixel party invites, trade requests, friend requests, guild invites, and duel requests from real chat `Component` data and shows a non-pausing HUD popup with configurable accept/decline keybinds.
 
 ## Features
 
